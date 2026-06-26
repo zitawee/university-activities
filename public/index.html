@@ -320,7 +320,7 @@ tr:hover td{background:#FAFAFA}
 </div>
 
 <script>
-const ACTIVITIES=['المرسم الجامعي','الموسيقى','الخط العربي','الحرف اليدوية','الأداء الحركي','المناظرات','الأنشطة الحزبية'];
+const ACTIVITIES=['المرسم الجامعي','الموسيقى','الخط العربي','الحرف اليدوية','الأداء الحركي','الأنشطة الحزبية'];
 const COLLEGES=['كلية الآداب','كلية الأعمال','كلية الشريعة','كلية العلوم التربوية','كلية الحقوق','كلية علوم الرياضة','كلية الفنون والتصميم','كلية الأمير الحسين بن عبدالله الثاني للعلوم السياسية و الدراسات الدولية','كلية اللغات الأجنبية','كلية الآثار','كلية العلوم','كلية الزراعة','كلية الهندسة','كلية الملك عبدالله الثاني لتكنولوجيا المعلومات','كلية الطب','كلية التمريض','كلية طب الأسنان','كلية علوم التأهيل','معهد الصحة العامة','كلية الدراسات العليا'];
 const ADMIT=['انتظام','انتساب','موازي','تحويل','تفوق فني'];
 const ACT_COLORS={'المرسم الجامعي':['#EEEDFE','#3C3489'],'الموسيقى':['#E1F5EE','#085041'],'الخط العربي':['#FAEEDA','#633806'],'الحرف اليدوية':['#FAECE7','#712B13'],'الأداء الحركي':['#EAF3DE','#27500A'],'الأنشطة الحزبية':['#FBEAF0','#72243E']};
@@ -671,7 +671,7 @@ function showPrint(t){
 }
 function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
 function today(){return new Date().toLocaleDateString('ar-JO',{year:'numeric',month:'long',day:'numeric'});}
-function printHdr(title,sub=''){return`<div class="print-page"><div class="print-title">جامعة الأردن — عمادة شؤون الطلبة<br><span style="font-size:14pt">${title}</span></div>${sub?`<div style="text-align:center;color:#666;margin-bottom:5mm">${sub}</div>`:''}<div style="font-size:10pt;color:#666;text-align:left;margin-bottom:6mm">تاريخ الطباعة: ${today()}</div>`;}
+function printHdr(title,sub=''){return`<div class="print-page"><div class="print-title">الجامعة الأردنية - عمادة شؤون الطلبة<br><span style="font-size:14pt">${title}</span></div>${sub?`<div style="text-align:center;color:#666;margin-bottom:5mm">${sub}</div>`:''}<div style="font-size:10pt;color:#666;text-align:left;margin-bottom:6mm">تاريخ الطباعة: ${today()}</div>`;}
 function studTable(rows){return rows.length?`<table class="print-table"><thead><tr><th>#</th><th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th><th>التخصص</th><th>سنة القبول</th><th>نوع القبول</th><th>تاريخ الالتحاق</th><th>الهاتف</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.student_id}</td><td>${r.name}</td><td>${r.gender}</td><td>${r.college}</td><td>${r.major}</td><td>${r.admit_year}</td><td>${r.admit_type||'-'}</td><td>${r.join_date}</td><td>${r.phone||'-'}</td></tr>`).join('')}</tbody></table><p style="font-size:10pt;margin-top:4mm">الإجمالي: ${rows.length} طالب</p>`:'<p style="text-align:center;color:#999">لا توجد بيانات</p>';}
 async function generatePrint(){
   let html='';
