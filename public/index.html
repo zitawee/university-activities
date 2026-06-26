@@ -7,392 +7,421 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#F3F4F6;--card:#fff;--primary:#534AB7;--primary2:#3C3489;
-  --text:#1A1A1A;--muted:#6B7280;--border:#E5E7EB;
-  --s-bg:#EAF3DE;--s-fg:#27500A;--e-bg:#FCEBEB;--e-fg:#791F1F;
-  --r:8px;--rl:12px;
-}
+:root{--bg:#F3F4F6;--card:#fff;--primary:#534AB7;--primary2:#3C3489;--text:#1A1A1A;--muted:#6B7280;--border:#E5E7EB;--s-bg:#EAF3DE;--s-fg:#27500A;--e-bg:#FCEBEB;--e-fg:#791F1F;--r:8px;--rl:12px}
 body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-/* Header */
-.header{background:var(--primary);padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
-.header h1{color:#fff;font-size:16px;font-weight:600}
-.header .db-path{color:#C4B5FD;font-size:12px}
-/* Nav */
+
+/* ══ صفحة تسجيل الدخول ══ */
+#login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#534AB7 0%,#3C3489 100%)}
+.login-box{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.login-logo{text-align:center;margin-bottom:24px}
+.login-logo i{font-size:48px;color:var(--primary)}
+.login-title{font-size:20px;font-weight:600;text-align:center;margin-bottom:4px}
+.login-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:28px}
+.login-group{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.login-group label{font-size:13px;color:var(--muted);font-weight:500}
+.login-group input{padding:10px 14px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:inherit;transition:.15s}
+.login-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(83,74,183,.1)}
+.login-btn{width:100%;padding:11px;background:var(--primary);color:#fff;border:none;border-radius:var(--r);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px;transition:.15s}
+.login-btn:hover{background:var(--primary2)}
+#login-error{color:var(--e-fg);background:var(--e-bg);border:1px solid #F09595;border-radius:var(--r);padding:8px 12px;font-size:13px;margin-bottom:12px;display:none}
+
+/* ══ التطبيق الرئيسي ══ */
+#app{display:none}
+.header{background:var(--primary);padding:10px 20px;display:flex;justify-content:space-between;align-items:center}
+.header h1{color:#fff;font-size:15px;font-weight:600}
+.header-left{display:flex;align-items:center;gap:12px}
+.user-info{color:#C4B5FD;font-size:12px;text-align:left}
+.user-name{color:#fff;font-size:13px;font-weight:500}
+.role-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.role-admin{background:#FAEEDA;color:#633806}
+.role-editor{background:#EAF3DE;color:#27500A}
+.role-viewer{background:#E1F5EE;color:#085041}
+.logout-btn{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:5px 12px;border-radius:var(--r);font-size:12px;cursor:pointer;font-family:inherit}
+.logout-btn:hover{background:rgba(255,255,255,.1)}
 .nav{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 16px;overflow-x:auto}
-.nav-btn{padding:12px 18px;font-size:13px;font-weight:500;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:inherit;transition:.15s}
+.nav-btn{padding:11px 16px;font-size:13px;font-weight:500;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:inherit;transition:.15s}
 .nav-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
 .nav-btn:hover{color:var(--text)}
-/* Main */
 .main{padding:20px;max-width:1200px;margin:0 auto}
 .panel{display:none}.panel.active{display:block}
-/* Cards */
+
+/* ══ مشترك ══ */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:18px 22px;margin-bottom:14px}
-/* Form */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
 .form-group{display:flex;flex-direction:column;gap:5px}
 .form-group.full{grid-column:1/-1}
 .form-group label{font-size:12px;color:var(--muted);font-weight:600}
-.form-group input,.form-group select{padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:inherit;color:var(--text);background:#fff;transition:.15s}
-.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(83,74,183,.1)}
+.form-group input,.form-group select{padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:inherit;color:var(--text);background:#fff}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary)}
 .form-group input[readonly]{background:#F9FAFB;color:var(--muted)}
-/* Buttons */
-.btn{padding:9px 20px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid var(--border);background:#fff;color:var(--text);transition:.15s}
+.btn{padding:8px 18px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid var(--border);background:#fff;color:var(--text);transition:.15s}
 .btn:hover{background:#F9FAFB}
 .btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
 .btn-primary:hover{background:var(--primary2)}
 .btn-danger{background:transparent;color:#A32D2D;border-color:#F09595;font-size:12px;padding:4px 10px}
 .btn-danger:hover{background:var(--e-bg)}
-.btn-sm{padding:6px 14px;font-size:12px}
-/* Stats */
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.stat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
-.stat-num{font-size:32px;font-weight:700;color:var(--primary)}
-.stat-label{font-size:12px;color:var(--muted);margin-top:4px}
-/* Activity grid */
-.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-.act-pill{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:var(--r);font-size:13px;font-weight:500}
-/* Table */
-.table-wrap{overflow-x:auto;border-radius:var(--rl);border:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#F9FAFB;padding:10px 12px;text-align:right;font-size:12px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:#FAFAFA}
-/* Badge */
-.badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
-/* Filter bar */
-.filter-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
-.filter-bar input,.filter-bar select{padding:8px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:#fff;color:var(--text)}
-.filter-bar input:focus,.filter-bar select:focus{outline:none;border-color:var(--primary)}
-.filter-bar input[type=text]{flex:1;min-width:160px}
-/* Message */
-.msg{padding:10px 14px;border-radius:var(--r);font-size:13px;margin-bottom:12px;display:none}
+.btn-sm{padding:6px 12px;font-size:12px}
+.msg{padding:9px 12px;border-radius:var(--r);font-size:13px;margin-bottom:12px;display:none}
 .msg.success{background:var(--s-bg);color:var(--s-fg);border:1px solid #97C459}
 .msg.error{background:var(--e-bg);color:var(--e-fg);border:1px solid #F09595}
-/* Query card */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center}
+.stat-num{font-size:30px;font-weight:700;color:var(--primary)}
+.stat-label{font-size:12px;color:var(--muted);margin-top:3px}
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.act-pill{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-radius:var(--r);font-size:13px;font-weight:500}
+.table-wrap{overflow-x:auto;border-radius:var(--rl);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#F9FAFB;padding:9px 12px;text-align:right;font-size:12px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FAFAFA}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.filter-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.filter-bar input,.filter-bar select{padding:8px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:#fff}
+.filter-bar input[type=text]{flex:1;min-width:160px}
+.sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.sec-header h2{font-size:16px;font-weight:600}
+.count-badge{font-size:12px;color:var(--muted)}
 .query-block{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:20px;margin-bottom:16px}
 .query-title{font-size:14px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .query-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px}
 .query-row .form-group{flex:1;min-width:140px;margin-bottom:0}
 .result-section{background:#F9FAFB;border-radius:var(--r);padding:14px;margin-top:12px;border:1px solid var(--border);display:none}
-/* Recent list */
-.recent-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
-.recent-item:last-child{border-bottom:none}
-.avatar{width:38px;height:38px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#3C3489;flex-shrink:0}
-/* Count cards */
-.count-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.count-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px;text-align:center}
-.count-num{font-size:26px;font-weight:700}
-.count-label{font-size:11px;color:var(--muted);margin-top:2px}
-/* Section header */
-.sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.sec-header h2{font-size:16px;font-weight:600}
-.count-badge{font-size:12px;color:var(--muted)}
+.no-access{text-align:center;padding:40px;color:var(--muted)}
+.no-access i{font-size:48px;margin-bottom:12px;display:block}
+@media print{.header,.nav,.no-print{display:none!important}.print-section{display:block!important}body{background:#fff;direction:rtl}.print-page{padding:20mm}.print-title{font-size:18pt;font-weight:700;text-align:center;margin-bottom:6mm;border-bottom:2px solid #000;padding-bottom:4mm}.print-table{width:100%;border-collapse:collapse;font-size:10pt}.print-table th{background:#534AB7;color:#fff;padding:6px 8px;text-align:right;font-weight:600}.print-table td{padding:5px 8px;border:0.5px solid #ccc}.stat-print-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;margin-bottom:8mm}.stat-print-card{border:1px solid #ccc;border-radius:6px;padding:6mm;text-align:center}.stat-print-num{font-size:28pt;font-weight:700;color:#534AB7}.student-card-box{border:2px solid #534AB7;border-radius:8px;padding:8mm;max-width:140mm;margin:0 auto}.student-card-header{background:#534AB7;color:#fff;padding:5mm;border-radius:4px;margin-bottom:5mm;text-align:center}.student-card-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid #eee;font-size:11pt}}
 @media(max-width:640px){.form-grid,.stats-grid,.act-grid{grid-template-columns:1fr}}
-</style>
-
-<style id="print-css">
-@media print {
-  .header,.nav,.no-print{display:none!important}
-  .print-section{display:block!important}
-  body{background:#fff;color:#000;font-size:12pt;direction:rtl}
-  .print-page{padding:20mm;max-width:100%}
-  .print-title{font-size:18pt;font-weight:700;text-align:center;margin-bottom:6mm;border-bottom:2px solid #000;padding-bottom:4mm}
-  .print-sub{font-size:11pt;text-align:center;color:#444;margin-bottom:8mm}
-  .print-table{width:100%;border-collapse:collapse;font-size:10pt}
-  .print-table th{background:#534AB7;color:#fff;padding:6px 8px;text-align:right;font-weight:600}
-  .print-table td{padding:5px 8px;border:0.5px solid #ccc;text-align:right}
-  .print-table tr:nth-child(even) td{background:#f5f5f5}
-  .stat-print-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;margin-bottom:8mm}
-  .stat-print-card{border:1px solid #ccc;border-radius:6px;padding:6mm;text-align:center}
-  .stat-print-num{font-size:28pt;font-weight:700;color:#534AB7}
-  .stat-print-lbl{font-size:10pt;color:#666}
-  .student-card-box{border:2px solid #534AB7;border-radius:8px;padding:8mm;max-width:140mm;margin:0 auto}
-  .student-card-header{background:#534AB7;color:#fff;padding:5mm;border-radius:4px;margin-bottom:5mm;text-align:center}
-  .student-card-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid #eee;font-size:11pt}
-  .student-card-lbl{color:#666;min-width:40mm}
-  .act-section{margin-bottom:6mm;break-inside:avoid}
-  .act-section h3{font-size:13pt;color:#534AB7;border-right:4px solid #534AB7;padding-right:3mm;margin-bottom:3mm}
-}
-@media screen {
-  #print-preview{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:20px;min-height:200px}
-}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="db-path" id="db-path">📁 جاري التحميل...</div>
-  <h1>🎓 نظام إدارة الأنشطة الجامعية</h1>
-</div>
-
-<nav class="nav">
-  <button class="nav-btn active" onclick="go('dash',this)">📊 لوحة التحكم</button>
-  <button class="nav-btn" onclick="go('add',this)">➕ تسجيل طالب</button>
-  <button class="nav-btn" onclick="go('students',this)">👥 الطلبة</button>
-  <button class="nav-btn" onclick="go('ach',this)">🏆 الإنجازات</button>
-  <button class="nav-btn" onclick="go('addach',this)">📝 إضافة إنجاز</button>
-  <button class="nav-btn" onclick="go('queries',this)">🔍 الاستعلامات</button>
-  <button class="nav-btn" onclick="go('print',this)">🖨️ الطباعة</button>
-</nav>
-
-<div class="main">
-
-<!-- ══ لوحة التحكم ══ -->
-<div id="panel-dash" class="panel active">
-  <div class="stats-grid" id="dash-stats"></div>
-  <h3 style="margin-bottom:10px;font-size:15px">توزيع الطلبة على الأنشطة</h3>
-  <div class="act-grid" id="dash-acts"></div>
-  <div class="card">
-    <h3 style="margin-bottom:12px;font-size:15px">آخر المسجلين</h3>
-    <div id="dash-recent"></div>
+<!-- ══ صفحة تسجيل الدخول ══ -->
+<div id="login-page">
+  <div class="login-box">
+    <div class="login-logo"><i class="ti ti-school"></i></div>
+    <div class="login-title">نظام إدارة الأنشطة الجامعية</div>
+    <div class="login-sub">يرجى تسجيل الدخول للمتابعة</div>
+    <div id="login-error"></div>
+    <div class="login-group">
+      <label>اسم المستخدم</label>
+      <input id="l-user" type="text" placeholder="أدخل اسم المستخدم" autocomplete="username">
+    </div>
+    <div class="login-group">
+      <label>كلمة المرور</label>
+      <input id="l-pass" type="password" placeholder="أدخل كلمة المرور" autocomplete="current-password">
+    </div>
+    <button class="login-btn" onclick="doLogin()">تسجيل الدخول</button>
   </div>
 </div>
 
-<!-- ══ تسجيل طالب ══ -->
-<div id="panel-add" class="panel">
-  <div class="card">
-    <h2 style="margin-bottom:16px;font-size:16px;font-weight:600">تسجيل طالب جديد</h2>
-    <div id="add-msg" class="msg"></div>
-    <div class="form-grid">
-      <div class="form-group"><label>الرقم الجامعي *</label><input id="f-id" type="text" placeholder="مثال: 2024001"></div>
-      <div class="form-group"><label>الاسم الكامل *</label><input id="f-name" type="text" placeholder="اسم الطالب"></div>
-      <div class="form-group"><label>الجنس *</label><select id="f-gender"><option value="">اختر...</option><option>ذكر</option><option>أنثى</option></select></div>
-      <div class="form-group"><label>الكلية *</label><select id="f-college"><option value="">اختر الكلية...</option></select></div>
-      <div class="form-group"><label>التخصص *</label><input id="f-major" type="text" placeholder="التخصص الدراسي"></div>
-      <div class="form-group"><label>سنة القبول *</label><input id="f-year" type="number" placeholder="2024" min="2000" max="2035"></div>
-      <div class="form-group"><label>نوع القبول</label><select id="f-admit"><option value="">اختر...</option></select></div>
-      <div class="form-group"><label>رقم الهاتف</label><input id="f-phone" type="tel" placeholder="07XXXXXXXX"></div>
-      <div class="form-group"><label>النشاط *</label><select id="f-activity"><option value="">اختر النشاط...</option></select></div>
-      <div class="form-group"><label>تاريخ الالتحاق *</label><input id="f-join" type="date"></div>
+<!-- ══ التطبيق الرئيسي ══ -->
+<div id="app">
+  <div class="header">
+    <div class="header-left">
+      <div class="user-info">
+        <div class="user-name" id="h-name"></div>
+        <span class="role-badge" id="h-role"></span>
+      </div>
     </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end">
-      <button class="btn" onclick="clearAdd()">مسح</button>
-      <button class="btn btn-primary" onclick="addStudent()">✔ تسجيل الطالب</button>
+    <h1><i class="ti ti-school"></i> نظام إدارة الأنشطة الجامعية</h1>
+    <button class="logout-btn" onclick="doLogout()"><i class="ti ti-logout"></i> خروج</button>
+  </div>
+
+  <nav class="nav" id="main-nav">
+    <button class="nav-btn active" onclick="go('dash',this)">📊 لوحة التحكم</button>
+    <button class="nav-btn" onclick="go('add',this)" id="nav-add">➕ تسجيل طالب</button>
+    <button class="nav-btn" onclick="go('students',this)">👥 الطلبة</button>
+    <button class="nav-btn" onclick="go('ach',this)">🏆 الإنجازات</button>
+    <button class="nav-btn" onclick="go('addach',this)" id="nav-addach">📝 إضافة إنجاز</button>
+    <button class="nav-btn" onclick="go('queries',this)">🔍 الاستعلامات</button>
+    <button class="nav-btn" onclick="go('print',this)">🖨️ الطباعة</button>
+    <button class="nav-btn" onclick="go('users',this)" id="nav-users">👤 المستخدمون</button>
+  </nav>
+
+  <div class="main">
+
+    <!-- لوحة التحكم -->
+    <div id="panel-dash" class="panel active">
+      <div class="stats-grid" id="dash-stats"></div>
+      <h3 style="margin-bottom:10px;font-size:15px">توزيع الطلبة على الأنشطة</h3>
+      <div class="act-grid" id="dash-acts"></div>
+      <div class="card"><h3 style="margin-bottom:12px;font-size:15px">آخر المسجلين</h3><div id="dash-recent"></div></div>
     </div>
+
+    <!-- تسجيل طالب -->
+    <div id="panel-add" class="panel">
+      <div class="card">
+        <h2 style="margin-bottom:16px;font-size:16px;font-weight:600">تسجيل طالب جديد</h2>
+        <div id="add-msg" class="msg"></div>
+        <div class="form-grid">
+          <div class="form-group"><label>الرقم الجامعي *</label><input id="f-id" type="text" placeholder="مثال: 2024001"></div>
+          <div class="form-group"><label>الاسم الكامل *</label><input id="f-name" type="text"></div>
+          <div class="form-group"><label>الجنس *</label><select id="f-gender"><option value="">اختر...</option><option>ذكر</option><option>أنثى</option></select></div>
+          <div class="form-group"><label>الكلية *</label><select id="f-college"><option value="">اختر الكلية...</option></select></div>
+          <div class="form-group"><label>التخصص *</label><input id="f-major" type="text"></div>
+          <div class="form-group"><label>سنة القبول *</label><input id="f-year" type="number" placeholder="2024"></div>
+          <div class="form-group"><label>نوع القبول</label><select id="f-admit"><option value="">اختر...</option></select></div>
+          <div class="form-group"><label>رقم الهاتف</label><input id="f-phone" type="tel" placeholder="07XXXXXXXX"></div>
+          <div class="form-group"><label>النشاط *</label><select id="f-activity"><option value="">اختر النشاط...</option></select></div>
+          <div class="form-group"><label>تاريخ الالتحاق *</label><input id="f-join" type="date"></div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn" onclick="clearAdd()">مسح</button>
+          <button class="btn btn-primary" onclick="addStudent()">✔ تسجيل الطالب</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- الطلبة -->
+    <div id="panel-students" class="panel">
+      <div class="sec-header"><h2>قائمة الطلبة المسجلين</h2><span class="count-badge" id="stud-count"></span></div>
+      <div class="filter-bar">
+        <input type="text" id="sf-q" placeholder="بحث..." oninput="loadStudents()">
+        <select id="sf-act" onchange="loadStudents()"><option value="">جميع الأنشطة</option></select>
+        <select id="sf-col" onchange="loadStudents()"><option value="">جميع الكليات</option></select>
+        <select id="sf-gen" onchange="loadStudents()"><option value="">كل الجنسين</option><option>ذكر</option><option>أنثى</option></select>
+        <button class="btn btn-sm" onclick="exportCSV('students')">⬇ CSV</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr>
+        <th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th><th>التخصص</th>
+        <th>سنة القبول</th><th>نوع القبول</th><th>النشاط</th><th>تاريخ الالتحاق</th><th>الهاتف</th><th id="stud-del-col"></th>
+      </tr></thead><tbody id="stud-body"></tbody></table></div>
+    </div>
+
+    <!-- الإنجازات -->
+    <div id="panel-ach" class="panel">
+      <div class="sec-header"><h2>إنجازات ومشاركات الطلبة</h2><span class="count-badge" id="ach-count"></span></div>
+      <div class="filter-bar">
+        <input type="text" id="af-q" placeholder="بحث..." oninput="loadAch()">
+        <select id="af-act" onchange="loadAch()"><option value="">جميع الأنشطة</option></select>
+        <button class="btn btn-sm" onclick="exportCSV('achievements')">⬇ CSV</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr>
+        <th>الرقم الجامعي</th><th>اسم الطالب</th><th>الإنجاز</th><th>التاريخ</th><th>النشاط</th><th id="ach-del-col"></th>
+      </tr></thead><tbody id="ach-body"></tbody></table></div>
+    </div>
+
+    <!-- إضافة إنجاز -->
+    <div id="panel-addach" class="panel">
+      <div class="card">
+        <h2 style="margin-bottom:16px;font-size:16px;font-weight:600">إضافة إنجاز أو مشاركة</h2>
+        <div id="ach-msg" class="msg"></div>
+        <div class="form-grid">
+          <div class="form-group"><label>الرقم الجامعي *</label><input id="a-id" type="text" onblur="autoFill()"></div>
+          <div class="form-group"><label>اسم الطالب</label><input id="a-name" type="text" readonly></div>
+          <div class="form-group full"><label>الإنجاز / المشاركة *</label><input id="a-work" type="text"></div>
+          <div class="form-group"><label>تاريخ الإنجاز *</label><input id="a-date" type="date"></div>
+          <div class="form-group"><label>النشاط المرتبط</label><select id="a-act"><option value="">اختر...</option></select></div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn" onclick="clearAch()">مسح</button>
+          <button class="btn btn-primary" onclick="addAch()">✔ إضافة الإنجاز</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- الاستعلامات -->
+    <div id="panel-queries" class="panel">
+      <div class="query-block">
+        <div class="query-title"><i class="ti ti-id-badge" style="color:var(--primary);font-size:18px"></i> استعلام عن بيانات طالب</div>
+        <div class="query-row">
+          <div class="form-group" style="flex:2"><label>الرقم الجامعي أو الاسم</label><input id="q1-in" type="text"></div>
+          <button class="btn btn-primary" onclick="q1Search()">🔍 بحث</button>
+        </div>
+        <div id="q1-result" class="result-section"></div>
+      </div>
+      <div class="query-block">
+        <div class="query-title"><i class="ti ti-trophy" style="color:#633806;font-size:18px"></i> استعلام عن إنجازات طالب</div>
+        <div class="query-row">
+          <div class="form-group" style="flex:2"><label>الرقم الجامعي أو الاسم</label><input id="q2-in" type="text"></div>
+          <button class="btn btn-primary" onclick="q2Search()">🔍 بحث</button>
+        </div>
+        <div id="q2-result" class="result-section"></div>
+      </div>
+      <div class="query-block">
+        <div class="query-title"><i class="ti ti-chart-bar" style="color:#085041;font-size:18px"></i> عدد الطلبة في نشاط خلال فترة</div>
+        <div class="query-row">
+          <div class="form-group" style="flex:2"><label>النشاط</label><select id="q3-act"><option value="">كل الأنشطة</option></select></div>
+          <div class="form-group"><label>من تاريخ</label><input id="q3-from" type="date"></div>
+          <div class="form-group"><label>إلى تاريخ</label><input id="q3-to" type="date"></div>
+          <button class="btn btn-primary" onclick="q3Search()">🔍 بحث</button>
+        </div>
+        <div id="q3-result" class="result-section"></div>
+      </div>
+      <div class="query-block">
+        <div class="query-title"><i class="ti ti-award" style="color:#72243E;font-size:18px"></i> إنجازات نشاط خلال فترة</div>
+        <div class="query-row">
+          <div class="form-group" style="flex:2"><label>النشاط *</label><select id="q4-act"><option value="">اختر...</option></select></div>
+          <div class="form-group"><label>من تاريخ</label><input id="q4-from" type="date"></div>
+          <div class="form-group"><label>إلى تاريخ</label><input id="q4-to" type="date"></div>
+          <button class="btn btn-primary" onclick="q4Search()">🔍 بحث</button>
+        </div>
+        <div id="q4-result" class="result-section"></div>
+      </div>
+    </div>
+
+    <!-- الطباعة -->
+    <div id="panel-print" class="panel">
+      <h2 style="font-size:16px;font-weight:600;margin-bottom:16px">خيارات الطباعة</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px" class="no-print">
+        <div class="card" style="cursor:pointer" onclick="showPrint('list')"><div style="font-size:22px;margin-bottom:6px">👥</div><div style="font-size:14px;font-weight:600;margin-bottom:4px">قائمة طلبة النشاط</div><div style="font-size:12px;color:var(--muted)">جميع الطلبة المسجلين في نشاط محدد</div></div>
+        <div class="card" style="cursor:pointer" onclick="showPrint('student')"><div style="font-size:22px;margin-bottom:6px">🪪</div><div style="font-size:14px;font-weight:600;margin-bottom:4px">بطاقة طالب</div><div style="font-size:12px;color:var(--muted)">بيانات طالب واحد بشكل منسق</div></div>
+        <div class="card" style="cursor:pointer" onclick="showPrint('achievements')"><div style="font-size:22px;margin-bottom:6px">🏆</div><div style="font-size:14px;font-weight:600;margin-bottom:4px">إنجازات طالب</div><div style="font-size:12px;color:var(--muted)">ملف كامل بإنجازات طالب محدد</div></div>
+        <div class="card" style="cursor:pointer" onclick="showPrint('actach')"><div style="font-size:22px;margin-bottom:6px">🎖️</div><div style="font-size:14px;font-weight:600;margin-bottom:4px">إنجازات النشاط</div><div style="font-size:12px;color:var(--muted)">إنجازات نشاط خلال فترة زمنية</div></div>
+        <div class="card" style="cursor:pointer" onclick="showPrint('stats')"><div style="font-size:22px;margin-bottom:6px">📊</div><div style="font-size:14px;font-weight:600;margin-bottom:4px">التقرير الإحصائي</div><div style="font-size:12px;color:var(--muted)">ملخص إحصائي لجميع الأنشطة</div></div>
+        <div class="card" style="cursor:pointer" onclick="showPrint('all')"><div style="font-size:22px;margin-bottom:6px">📋</div><div style="font-size:14px;font-weight:600;margin-bottom:4px">كل الطلبة المسجلين</div><div style="font-size:12px;color:var(--muted)">قائمة شاملة بجميع الطلبة</div></div>
+      </div>
+      <div id="print-form" style="display:none" class="card no-print">
+        <div id="print-form-content"></div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px">
+          <button class="btn" onclick="document.getElementById('print-form').style.display='none'">إلغاء</button>
+          <button class="btn btn-primary" onclick="generatePrint()">🖨️ معاينة وطباعة</button>
+        </div>
+      </div>
+      <div id="print-preview-area" style="display:none">
+        <div class="no-print" style="display:flex;gap:10px;margin-bottom:12px">
+          <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة</button>
+          <button class="btn" onclick="document.getElementById('print-preview-area').style.display='none'">✕ إغلاق</button>
+        </div>
+        <div id="print-preview" class="print-section"></div>
+      </div>
+    </div>
+
+    <!-- المستخدمون -->
+    <div id="panel-users" class="panel">
+      <div class="sec-header"><h2>إدارة المستخدمين</h2></div>
+      <div class="card">
+        <h3 style="margin-bottom:14px;font-size:15px">إضافة مستخدم جديد</h3>
+        <div id="user-msg" class="msg"></div>
+        <div class="form-grid">
+          <div class="form-group"><label>اسم المستخدم *</label><input id="u-username" type="text" placeholder="username"></div>
+          <div class="form-group"><label>الاسم الكامل *</label><input id="u-fullname" type="text"></div>
+          <div class="form-group"><label>كلمة المرور *</label><input id="u-password" type="password"></div>
+          <div class="form-group"><label>الصلاحية *</label>
+            <select id="u-role">
+              <option value="viewer">عرض فقط</option>
+              <option value="editor">مدخل بيانات</option>
+              <option value="admin">مدير</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button class="btn btn-primary" onclick="addUser()">✔ إضافة المستخدم</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>اسم المستخدم</th><th>الاسم الكامل</th><th>الصلاحية</th><th>تاريخ الإنشاء</th><th></th></tr></thead>
+        <tbody id="users-body"></tbody></table>
+      </div>
+    </div>
+
   </div>
 </div>
-
-<!-- ══ الطلبة ══ -->
-<div id="panel-students" class="panel">
-  <div class="sec-header">
-    <h2>قائمة الطلبة المسجلين</h2>
-    <span class="count-badge" id="stud-count"></span>
-  </div>
-  <div class="filter-bar">
-    <input type="text" id="sf-q" placeholder="بحث بالاسم أو الرقم..." oninput="loadStudents()">
-    <select id="sf-act" onchange="loadStudents()"><option value="">جميع الأنشطة</option></select>
-    <select id="sf-col" onchange="loadStudents()"><option value="">جميع الكليات</option></select>
-    <select id="sf-gen" onchange="loadStudents()"><option value="">كل الجنسين</option><option>ذكر</option><option>أنثى</option></select>
-    <button class="btn btn-sm" onclick="exportCSV('students')">⬇ تصدير CSV</button>
-  </div>
-  <div class="table-wrap">
-    <table><thead><tr>
-      <th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th>
-      <th>التخصص</th><th>سنة القبول</th><th>نوع القبول</th><th>النشاط</th>
-      <th>تاريخ الالتحاق</th><th>الهاتف</th><th></th>
-    </tr></thead>
-    <tbody id="stud-body"></tbody></table>
-  </div>
-</div>
-
-<!-- ══ الإنجازات ══ -->
-<div id="panel-ach" class="panel">
-  <div class="sec-header">
-    <h2>إنجازات ومشاركات الطلبة</h2>
-    <span class="count-badge" id="ach-count"></span>
-  </div>
-  <div class="filter-bar">
-    <input type="text" id="af-q" placeholder="بحث في الإنجازات..." oninput="loadAch()">
-    <select id="af-act" onchange="loadAch()"><option value="">كل الأنشطة</option></select>
-    <button class="btn btn-sm" onclick="exportCSV('achievements')">⬇ تصدير CSV</button>
-  </div>
-  <div class="table-wrap">
-    <table><thead><tr>
-      <th>الرقم الجامعي</th><th>اسم الطالب</th><th>الإنجاز / المشاركة</th>
-      <th>التاريخ</th><th>النشاط</th><th></th>
-    </tr></thead>
-    <tbody id="ach-body"></tbody></table>
-  </div>
-</div>
-
-<!-- ══ إضافة إنجاز ══ -->
-<div id="panel-addach" class="panel">
-  <div class="card">
-    <h2 style="margin-bottom:16px;font-size:16px;font-weight:600">إضافة إنجاز أو مشاركة</h2>
-    <div id="ach-msg" class="msg"></div>
-    <div class="form-grid">
-      <div class="form-group"><label>الرقم الجامعي *</label><input id="a-id" type="text" placeholder="الرقم الجامعي" onblur="autoFill()"></div>
-      <div class="form-group"><label>اسم الطالب</label><input id="a-name" type="text" placeholder="يُملأ تلقائياً" readonly></div>
-      <div class="form-group full"><label>الإنجاز / المشاركة *</label><input id="a-work" type="text" placeholder="وصف الإنجاز أو العمل المنجز"></div>
-      <div class="form-group"><label>تاريخ الإنجاز *</label><input id="a-date" type="date"></div>
-      <div class="form-group"><label>النشاط المرتبط</label><select id="a-act"><option value="">اختر...</option></select></div>
-    </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end">
-      <button class="btn" onclick="clearAch()">مسح</button>
-      <button class="btn btn-primary" onclick="addAch()">✔ إضافة الإنجاز</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ الاستعلامات ══ -->
-<div id="panel-queries" class="panel">
-
-  <!-- Q1 -->
-  <div class="query-block">
-    <div class="query-title"><i class="ti ti-id-badge" style="color:var(--primary);font-size:20px"></i> استعلام عن بيانات طالب</div>
-    <div class="query-row">
-      <div class="form-group" style="flex:2;min-width:200px"><label>الرقم الجامعي أو الاسم</label><input id="q1-in" type="text" placeholder="أدخل الرقم الجامعي أو الاسم"></div>
-      <button class="btn btn-primary" onclick="q1Search()">🔍 بحث</button>
-    </div>
-    <div id="q1-result" class="result-section"></div>
-  </div>
-
-  <!-- Q2 -->
-  <div class="query-block">
-    <div class="query-title"><i class="ti ti-trophy" style="color:#633806;font-size:20px"></i> استعلام عن إنجازات طالب</div>
-    <div class="query-row">
-      <div class="form-group" style="flex:2;min-width:200px"><label>الرقم الجامعي أو الاسم</label><input id="q2-in" type="text" placeholder="أدخل الرقم الجامعي أو الاسم"></div>
-      <button class="btn btn-primary" onclick="q2Search()">🔍 بحث</button>
-    </div>
-    <div id="q2-result" class="result-section"></div>
-  </div>
-
-  <!-- Q3 -->
-  <div class="query-block">
-    <div class="query-title"><i class="ti ti-chart-bar" style="color:#085041;font-size:20px"></i> عدد الطلبة المنتسبين في نشاط خلال فترة محددة</div>
-    <div class="query-row">
-      <div class="form-group" style="flex:2"><label>النشاط</label><select id="q3-act"><option value="">كل الأنشطة</option></select></div>
-      <div class="form-group"><label>من تاريخ</label><input id="q3-from" type="date"></div>
-      <div class="form-group"><label>إلى تاريخ</label><input id="q3-to" type="date"></div>
-      <button class="btn btn-primary" onclick="q3Search()">🔍 بحث</button>
-    </div>
-    <div id="q3-result" class="result-section"></div>
-  </div>
-
-  <!-- Q4 -->
-  <div class="query-block">
-    <div class="query-title"><i class="ti ti-award" style="color:#72243E;font-size:20px"></i> استعلام عن إنجازات نشاط خلال فترة محددة</div>
-    <div class="query-row">
-      <div class="form-group" style="flex:2"><label>النشاط *</label><select id="q4-act"><option value="">اختر النشاط...</option></select></div>
-      <div class="form-group"><label>من تاريخ</label><input id="q4-from" type="date"></div>
-      <div class="form-group"><label>إلى تاريخ</label><input id="q4-to" type="date"></div>
-      <button class="btn btn-primary" onclick="q4Search()">🔍 بحث</button>
-    </div>
-    <div id="q4-result" class="result-section"></div>
-  </div>
-
-</div><!-- end queries -->
-
-<!-- ══ الطباعة ══ -->
-<div id="panel-print" class="panel">
-  <h2 style="font-size:16px;font-weight:600;margin-bottom:16px">خيارات الطباعة</h2>
-
-  <!-- بطاقات الخيارات -->
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px" class="no-print">
-
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px;cursor:pointer" onclick="showPrint('list')">
-      <div style="font-size:22px;margin-bottom:6px">👥</div>
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">قائمة طلبة النشاط</div>
-      <div style="font-size:12px;color:var(--muted)">جميع الطلبة المسجلين في نشاط محدد</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px;cursor:pointer" onclick="showPrint('student')">
-      <div style="font-size:22px;margin-bottom:6px">🪪</div>
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">بطاقة طالب</div>
-      <div style="font-size:12px;color:var(--muted)">بيانات طالب واحد بشكل منسق</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px;cursor:pointer" onclick="showPrint('achievements')">
-      <div style="font-size:22px;margin-bottom:6px">🏆</div>
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">إنجازات طالب</div>
-      <div style="font-size:12px;color:var(--muted)">ملف كامل بإنجازات طالب محدد</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px;cursor:pointer" onclick="showPrint('actach')">
-      <div style="font-size:22px;margin-bottom:6px">🎖️</div>
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">إنجازات النشاط</div>
-      <div style="font-size:12px;color:var(--muted)">إنجازات نشاط خلال فترة زمنية</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px;cursor:pointer" onclick="showPrint('stats')">
-      <div style="font-size:22px;margin-bottom:6px">📊</div>
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">التقرير الإحصائي الشامل</div>
-      <div style="font-size:12px;color:var(--muted)">ملخص إحصائي لجميع الأنشطة</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px;cursor:pointer" onclick="showPrint('all')">
-      <div style="font-size:22px;margin-bottom:6px">📋</div>
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">كل الطلبة المسجلين</div>
-      <div style="font-size:12px;color:var(--muted)">قائمة شاملة بجميع الطلبة</div>
-    </div>
-
-  </div>
-
-  <!-- نموذج الاختيار -->
-  <div id="print-form" style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:18px;margin-bottom:16px;display:none" class="no-print">
-    <div id="print-form-content"></div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px">
-      <button class="btn" onclick="document.getElementById('print-form').style.display='none'">إلغاء</button>
-      <button class="btn btn-primary" onclick="generatePrint()">🖨️ معاينة وطباعة</button>
-    </div>
-  </div>
-
-  <!-- منطقة المعاينة -->
-  <div id="print-preview-area" style="display:none">
-    <div class="no-print" style="display:flex;gap:10px;margin-bottom:12px;align-items:center">
-      <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة</button>
-      <button class="btn" onclick="closePrintPreview()">✕ إغلاق المعاينة</button>
-      <span style="font-size:12px;color:var(--muted)">ستُطبع المحتويات أدناه فقط</span>
-    </div>
-    <div id="print-preview" class="print-section"></div>
-  </div>
-
-</div>
-<!-- نهاية لوحة الطباعة -->
-</div><!-- end main -->
 
 <script>
-const ACTIVITIES = ["المرسم الجامعي","الموسيقى","الخط العربي","الحرف اليدوية","الأداء الحركي","الأنشطة الحزبية"];
-const COLLEGES   = ["كلية الآداب","كلية الأعمال","كلية الشريعة","كلية العلوم التربوية","كلية الحقوق","كلية علوم الرياضة","كلية الفنون والتصميم","كلية الأمير الحسين بن عبدالله الثاني للعلوم السياسية و الدراسات الدولية","كلية اللغات الأجنبية","كلية الآثار","كلية العلوم","كلية الزراعة","كلية الهندسة","كلية الملك عبدالله الثاني لتكنولوجيا المعلومات","كلية الطب","كلية التمريض","كلية طب الأسنان","كلية علوم التأهيل","معهد الصحة العامة","كلية الدراسات العليا"];
-const ADMIT      = ["انتظام","انتساب","موازي","تحويل","تفوق فني"];
-const ACT_COLORS = {"المرسم الجامعي":["#EEEDFE","#3C3489"],"الموسيقى":["#E1F5EE","#085041"],"الخط العربي":["#FAEEDA","#633806"],"الحرف اليدوية":["#FAECE7","#712B13"],"الأداء الحركي":["#EAF3DE","#27500A"],"الأنشطة الحزبية":["#FBEAF0","#72243E"]};
+const ACTIVITIES=['المرسم الجامعي','الموسيقى','الخط العربي','الحرف اليدوية','الأداء الحركي','الأنشطة الحزبية'];
+const COLLEGES=['كلية الآداب','كلية الأعمال','كلية الشريعة','كلية العلوم التربوية','كلية الحقوق','كلية علوم الرياضة','كلية الفنون والتصميم','كلية الأمير الحسين بن عبدالله الثاني للعلوم السياسية و الدراسات الدولية','كلية اللغات الأجنبية','كلية الآثار','كلية العلوم','كلية الزراعة','كلية الهندسة','كلية الملك عبدالله الثاني لتكنولوجيا المعلومات','كلية الطب','كلية التمريض','كلية طب الأسنان','كلية علوم التأهيل','معهد الصحة العامة','كلية الدراسات العليا'];
+const ADMIT=['انتظام','انتساب','موازي','تحويل','تفوق فني'];
+const ACT_COLORS={'المرسم الجامعي':['#EEEDFE','#3C3489'],'الموسيقى':['#E1F5EE','#085041'],'الخط العربي':['#FAEEDA','#633806'],'الحرف اليدوية':['#FAECE7','#712B13'],'الأداء الحركي':['#EAF3DE','#27500A'],'الأنشطة الحزبية':['#FBEAF0','#72243E']};
+const ROLE_LABELS={'admin':'مدير','editor':'مدخل بيانات','viewer':'عرض فقط'};
+const ROLE_CLASSES={'admin':'role-admin','editor':'role-editor','viewer':'role-viewer'};
 
-// ملء القوائم
-function fillSelect(id, vals, allText='') {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const existing = el.value;
-  // مسح الخيارات القديمة
-  while(el.options.length > 0) el.remove(0);
-  // إضافة الخيار الافتراضي
-  if (allText) {
-    const def = document.createElement('option');
-    def.value = ''; def.textContent = allText;
-    el.appendChild(def);
-  }
-  // إضافة باقي الخيارات
-  vals.forEach(v => { const o=document.createElement('option'); o.value=o.textContent=v; el.appendChild(o); });
-  if(existing) el.value = existing;
+let currentUser=null;
+let token=localStorage.getItem('token');
+
+function fillSelect(id,vals,def=''){
+  const el=document.getElementById(id);if(!el)return;
+  while(el.options.length>(def?1:0))el.remove(def?1:0);
+  vals.forEach(v=>{const o=document.createElement('option');o.value=o.textContent=v;el.appendChild(o);});
 }
-function init() {
-  fillSelect('f-college', COLLEGES, 'اختر الكلية...');
-  fillSelect('f-admit',   ADMIT,    'اختر...');
+
+function badge(act){
+  if(!act)return '';
+  const[bg,fg]=ACT_COLORS[act]||['#F1EFE8','#444441'];
+  return`<span class="badge" style="background:${bg};color:${fg}">${act}</span>`;
+}
+
+function showMsg(id,text,err=false){
+  const el=document.getElementById(id);
+  el.textContent=text;el.className='msg '+(err?'error':'success');el.style.display='block';
+  setTimeout(()=>el.style.display='none',3500);
+}
+
+async function api(url,method='GET',body=null){
+  const opts={method,headers:{'Content-Type':'application/json','Authorization':'Bearer '+(token||'')}};
+  if(body)opts.body=JSON.stringify(body);
+  try{
+    const r=await fetch(url,opts);
+    const text=await r.text();
+    try{return JSON.parse(text);}catch{return{error:text};}
+  }catch(e){return{error:'تعذر الاتصال بالخادم'};}
+}
+
+// ══ تسجيل الدخول ══
+async function doLogin(){
+  const username=document.getElementById('l-user').value.trim();
+  const password=document.getElementById('l-pass').value;
+  const errEl=document.getElementById('login-error');
+  errEl.style.display='none';
+  if(!username||!password){errEl.textContent='يرجى إدخال اسم المستخدم وكلمة المرور';errEl.style.display='block';return;}
+  const r=await api('/api/auth/login','POST',{username,password});
+  if(r.error){errEl.textContent=r.error;errEl.style.display='block';return;}
+  token=r.token;
+  localStorage.setItem('token',token);
+  currentUser=r.user;
+  showApp();
+}
+
+document.getElementById('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.getElementById('l-user').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('l-pass').focus();});
+
+async function doLogout(){
+  await api('/api/auth/logout','POST');
+  localStorage.removeItem('token');
+  token=null;currentUser=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-page').style.display='flex';
+  document.getElementById('l-user').value='';
+  document.getElementById('l-pass').value='';
+}
+
+function showApp(){
+  document.getElementById('login-page').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('h-name').textContent=currentUser.fullName;
+  const rb=document.getElementById('h-role');
+  rb.textContent=ROLE_LABELS[currentUser.role];
+  rb.className='role-badge '+ROLE_CLASSES[currentUser.role];
+  // إخفاء الأزرار حسب الصلاحية
+  const isViewer=currentUser.role==='viewer';
+  const isAdmin=currentUser.role==='admin';
+  if(isViewer){
+    document.getElementById('nav-add').style.display='none';
+    document.getElementById('nav-addach').style.display='none';
+  }
+  if(!isAdmin) document.getElementById('nav-users').style.display='none';
+  // ملء القوائم
+  fillSelect('f-college',COLLEGES,'اختر الكلية...');
+  fillSelect('f-admit',ADMIT,'اختر...');
   fillSelect('f-activity',ACTIVITIES,'اختر النشاط...');
-  fillSelect('sf-act',    ACTIVITIES,'جميع الأنشطة');
-  fillSelect('sf-col',    COLLEGES,  'جميع الكليات');
-  fillSelect('af-act',    ACTIVITIES,'');
-  fillSelect('a-act',     ACTIVITIES,'');
-  fillSelect('q3-act',    ACTIVITIES,'');
-  fillSelect('q4-act',    ACTIVITIES,'');
-  document.getElementById('f-join').valueAsDate = new Date();
-  document.getElementById('a-date').valueAsDate = new Date();
+  fillSelect('sf-act',ACTIVITIES,'');
+  fillSelect('sf-col',COLLEGES,'');
+  fillSelect('af-act',ACTIVITIES,'');
+  fillSelect('a-act',ACTIVITIES,'');
+  fillSelect('q3-act',ACTIVITIES,'');
+  fillSelect('q4-act',ACTIVITIES,'');
+  document.getElementById('f-join').valueAsDate=new Date();
+  document.getElementById('a-date').valueAsDate=new Date();
+  // عمود الحذف
+  if(!isAdmin){
+    document.getElementById('stud-del-col').style.display='none';
+    document.getElementById('ach-del-col').style.display='none';
+  }
   loadDash();
 }
 
-// تنقل التبويبات
-function go(name, btn) {
+function go(name,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
@@ -400,479 +429,271 @@ function go(name, btn) {
   if(name==='dash')     loadDash();
   if(name==='students') loadStudents();
   if(name==='ach')      loadAch();
-}
-
-// API helper
-async function api(url, method='GET', body=null) {
-  try {
-    const opts = { method, headers:{'Content-Type':'application/json'} };
-    if(body) opts.body = JSON.stringify(body);
-    const r = await fetch(url, opts);
-    const text = await r.text();
-    try { return JSON.parse(text); }
-    catch(e) { return { error: 'خطأ في استجابة الخادم: ' + text.substring(0,100) }; }
-  } catch(e) {
-    console.error('API error:', e);
-    return { error: 'تعذر الاتصال بالخادم. تأكد من تشغيل start.bat' };
-  }
-}
-
-function badge(act) {
-  const [bg,fg] = ACT_COLORS[act]||['#F1EFE8','#444441'];
-  return `<span class="badge" style="background:${bg};color:${fg}">${act}</span>`;
-}
-
-function showMsg(id, text, err=false) {
-  const el = document.getElementById(id);
-  el.textContent = text;
-  el.className = 'msg ' + (err?'error':'success');
-  el.style.display = 'block';
-  setTimeout(()=>{ el.style.display='none'; }, 3500);
+  if(name==='users')    loadUsers();
 }
 
 // ══ لوحة التحكم ══
-async function loadDash() {
-  const d = await api('/api/stats');
-  document.getElementById('db-path').textContent = '💾 البيانات محفوظة على جهازك';
-
-  const statsEl = document.getElementById('dash-stats');
-  statsEl.innerHTML = [
-    [d.total_s,  'إجمالي السجلات', 'var(--primary)'],
-    [d.unique_s, 'طلبة فريدون',    '#085041'],
-    [d.total_a,  'الإنجازات',      '#633806'],
+async function loadDash(){
+  const d=await api('/api/stats');
+  if(d.error)return;
+  document.getElementById('dash-stats').innerHTML=[
+    [d.total_s,'إجمالي السجلات','var(--primary)'],
+    [d.unique_s,'طلبة فريدون','#085041'],
+    [d.total_a,'الإنجازات','#633806']
   ].map(([n,l,c])=>`<div class="stat-card"><div class="stat-num" style="color:${c}">${n}</div><div class="stat-label">${l}</div></div>`).join('');
-
-  const byAct = Object.fromEntries(d.by_activity.map(r=>[r.activity,r.n]));
-  document.getElementById('dash-acts').innerHTML = ACTIVITIES.map(a=>{
-    const [bg,fg]=ACT_COLORS[a]; const n=byAct[a]||0;
-    return `<div class="act-pill" style="background:${bg};color:${fg}"><span>${a}</span><strong>${n}</strong></div>`;
+  const byAct=Object.fromEntries(d.by_activity.map(r=>[r.activity,r.n]));
+  document.getElementById('dash-acts').innerHTML=ACTIVITIES.map(a=>{
+    const[bg,fg]=ACT_COLORS[a];const n=byAct[a]||0;
+    return`<div class="act-pill" style="background:${bg};color:${fg}"><span>${a}</span><strong>${n}</strong></div>`;
   }).join('');
-
-  document.getElementById('dash-recent').innerHTML = d.recent.length
-    ? d.recent.map(r=>`<div class="recent-item">
-        <div class="avatar">${r.name.charAt(0)}</div>
-        <div style="flex:1"><div style="font-size:14px;font-weight:500">${r.name}</div>
-        <div style="font-size:12px;color:var(--muted)">${r.student_id} · ${r.college}</div></div>
-        ${badge(r.activity)}
-      </div>`).join('')
-    : '<p style="color:var(--muted);text-align:center;padding:20px">لا يوجد طلبة مسجلون بعد</p>';
+  document.getElementById('dash-recent').innerHTML=d.recent.length
+    ?d.recent.map(r=>`<div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)">
+        <div style="width:36px;height:36px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#3C3489;flex-shrink:0">${r.name.charAt(0)}</div>
+        <div style="flex:1"><div style="font-size:14px;font-weight:500">${r.name}</div><div style="font-size:12px;color:var(--muted)">${r.student_id} · ${r.college}</div></div>
+        ${badge(r.activity)}</div>`).join('')
+    :'<p style="color:var(--muted);text-align:center;padding:20px">لا يوجد طلبة مسجلون بعد</p>';
 }
 
 // ══ تسجيل طالب ══
-async function addStudent() {
-  const data = {
-    student_id: document.getElementById('f-id').value.trim(),
-    name:       document.getElementById('f-name').value.trim(),
-    gender:     document.getElementById('f-gender').value,
-    college:    document.getElementById('f-college').value,
-    major:      document.getElementById('f-major').value.trim(),
-    admit_year: document.getElementById('f-year').value.trim(),
-    admit_type: document.getElementById('f-admit').value,
-    phone:      document.getElementById('f-phone').value.trim(),
-    activity:   document.getElementById('f-activity').value,
-    join_date:  document.getElementById('f-join').value,
+async function addStudent(){
+  const data={
+    student_id:document.getElementById('f-id').value.trim(),
+    name:document.getElementById('f-name').value.trim(),
+    gender:document.getElementById('f-gender').value,
+    college:document.getElementById('f-college').value,
+    major:document.getElementById('f-major').value.trim(),
+    admit_year:document.getElementById('f-year').value.trim(),
+    admit_type:document.getElementById('f-admit').value,
+    phone:document.getElementById('f-phone').value.trim(),
+    activity:document.getElementById('f-activity').value,
+    join_date:document.getElementById('f-join').value,
   };
-  const r = await api('/api/students','POST',data);
-  if(r.error) { showMsg('add-msg',r.error,true); return; }
+  const r=await api('/api/students','POST',data);
+  if(r.error){showMsg('add-msg',r.error,true);return;}
   showMsg('add-msg','تم تسجيل الطالب بنجاح ✓');
-  clearAdd(); loadDash();
+  clearAdd();loadDash();
 }
-function clearAdd() {
-  ['f-id','f-name','f-major','f-year','f-phone','f-join'].forEach(id=>document.getElementById(id).value='');
+function clearAdd(){
+  ['f-id','f-name','f-major','f-year','f-phone'].forEach(id=>document.getElementById(id).value='');
   ['f-gender','f-college','f-admit','f-activity'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-join').valueAsDate = new Date();
+  document.getElementById('f-join').valueAsDate=new Date();
 }
 
 // ══ الطلبة ══
-async function loadStudents() {
-  const q   = document.getElementById('sf-q').value.trim();
-  const act = document.getElementById('sf-act').value;
-  const col = document.getElementById('sf-col').value;
-  const gen = document.getElementById('sf-gen').value;
-  const p   = new URLSearchParams();
-  if(q)   p.set('q',q);
-  if(act) p.set('activity',act);
-  if(col) p.set('college',col);
-  if(gen) p.set('gender',gen);
-  const rows = await api('/api/students?'+p);
-  document.getElementById('stud-count').textContent = `${rows.length} طالب`;
-  document.getElementById('stud-body').innerHTML = rows.length
-    ? rows.map(r=>`<tr>
-        <td><strong>${r.student_id}</strong></td>
-        <td>${r.name}</td><td>${r.gender}</td>
-        <td style="font-size:12px">${r.college}</td>
-        <td>${r.major}</td><td>${r.admit_year}</td>
-        <td>${r.admit_type||'-'}</td><td>${badge(r.activity)}</td>
-        <td>${r.join_date}</td><td>${r.phone||'-'}</td>
-        <td><button class="btn btn-danger" onclick="delStudent(${r.id})"><i class="ti ti-trash"></i></button></td>
-      </tr>`).join('')
-    : '<tr><td colspan="11" style="text-align:center;padding:30px;color:var(--muted)">لا توجد نتائج</td></tr>';
+async function loadStudents(){
+  const p=new URLSearchParams();
+  const q=document.getElementById('sf-q').value.trim();
+  const act=document.getElementById('sf-act').value;
+  const col=document.getElementById('sf-col').value;
+  const gen=document.getElementById('sf-gen').value;
+  if(q)p.set('q',q);if(act)p.set('activity',act);if(col)p.set('college',col);if(gen)p.set('gender',gen);
+  const rows=await api('/api/students?'+p);
+  document.getElementById('stud-count').textContent=`${rows.length||0} طالب`;
+  const isAdmin=currentUser?.role==='admin';
+  document.getElementById('stud-body').innerHTML=rows.length
+    ?rows.map(r=>`<tr><td><strong>${r.student_id}</strong></td><td>${r.name}</td><td>${r.gender}</td>
+      <td style="font-size:12px">${r.college}</td><td>${r.major}</td><td>${r.admit_year}</td>
+      <td>${r.admit_type||'-'}</td><td>${badge(r.activity)}</td><td>${r.join_date}</td><td>${r.phone||'-'}</td>
+      <td>${isAdmin?`<button class="btn btn-danger" onclick="delStudent('${r._id}')"><i class="ti ti-trash"></i></button>`:''}</td></tr>`).join('')
+    :'<tr><td colspan="11" style="text-align:center;padding:30px;color:var(--muted)">لا توجد نتائج</td></tr>';
 }
-async function delStudent(id) {
-  if(!confirm('هل تريد حذف هذا الطالب؟')) return;
+async function delStudent(id){
+  if(!confirm('هل تريد حذف هذا الطالب؟'))return;
   await api('/api/students/'+id,'DELETE');
-  loadStudents(); loadDash();
+  loadStudents();loadDash();
 }
 
 // ══ الإنجازات ══
-async function loadAch() {
-  const q   = document.getElementById('af-q').value.trim();
-  const act = document.getElementById('af-act').value;
-  const p   = new URLSearchParams();
-  if(q)   p.set('q',q);
-  if(act) p.set('activity',act);
-  const rows = await api('/api/achievements?'+p);
-  document.getElementById('ach-count').textContent = `${rows.length} إنجاز`;
-  document.getElementById('ach-body').innerHTML = rows.length
-    ? rows.map(r=>`<tr>
-        <td><strong>${r.student_id}</strong></td>
-        <td>${r.student_name||'-'}</td>
-        <td>${r.work}</td>
-        <td>${r.ach_date}</td>
-        <td>${badge(r.activity||'')}</td>
-        <td><button class="btn btn-danger" onclick="delAch(${r.id})"><i class="ti ti-trash"></i></button></td>
-      </tr>`).join('')
-    : '<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">لا توجد إنجازات</td></tr>';
+async function loadAch(){
+  const p=new URLSearchParams();
+  const q=document.getElementById('af-q').value.trim();
+  const act=document.getElementById('af-act').value;
+  if(q)p.set('q',q);if(act)p.set('activity',act);
+  const rows=await api('/api/achievements?'+p);
+  document.getElementById('ach-count').textContent=`${rows.length||0} إنجاز`;
+  const isAdmin=currentUser?.role==='admin';
+  document.getElementById('ach-body').innerHTML=rows.length
+    ?rows.map(r=>`<tr><td><strong>${r.student_id}</strong></td><td>${r.student_name||'-'}</td>
+      <td>${r.work}</td><td>${r.ach_date}</td><td>${badge(r.activity)}</td>
+      <td>${isAdmin?`<button class="btn btn-danger" onclick="delAch('${r._id}')"><i class="ti ti-trash"></i></button>`:''}</td></tr>`).join('')
+    :'<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">لا توجد إنجازات</td></tr>';
 }
-async function delAch(id) {
-  if(!confirm('هل تريد حذف هذا الإنجاز؟')) return;
+async function delAch(id){
+  if(!confirm('هل تريد حذف هذا الإنجاز؟'))return;
   await api('/api/achievements/'+id,'DELETE');
   loadAch();
 }
 
 // ══ إضافة إنجاز ══
-async function autoFill() {
-  const sid = document.getElementById('a-id').value.trim();
-  if(!sid) return;
-  const r = await api('/api/students/lookup?q='+encodeURIComponent(sid));
-  if(r) {
-    document.getElementById('a-name').value = r.name;
-    if(!document.getElementById('a-act').value) document.getElementById('a-act').value = r.activity;
+async function autoFill(){
+  const sid=document.getElementById('a-id').value.trim();if(!sid)return;
+  const r=await api('/api/students/lookup?q='+encodeURIComponent(sid));
+  if(r&&r.name){
+    document.getElementById('a-name').value=r.name;
+    if(!document.getElementById('a-act').value)document.getElementById('a-act').value=r.activity;
   }
 }
-async function addAch() {
-  const data = {
-    student_id:   document.getElementById('a-id').value.trim(),
-    student_name: document.getElementById('a-name').value.trim(),
-    work:         document.getElementById('a-work').value.trim(),
-    ach_date:     document.getElementById('a-date').value,
-    activity:     document.getElementById('a-act').value,
+async function addAch(){
+  const data={
+    student_id:document.getElementById('a-id').value.trim(),
+    student_name:document.getElementById('a-name').value.trim(),
+    work:document.getElementById('a-work').value.trim(),
+    ach_date:document.getElementById('a-date').value,
+    activity:document.getElementById('a-act').value,
   };
-  const r = await api('/api/achievements','POST',data);
-  if(r.error) { showMsg('ach-msg',r.error,true); return; }
+  const r=await api('/api/achievements','POST',data);
+  if(r.error){showMsg('ach-msg',r.error,true);return;}
   showMsg('ach-msg','تم إضافة الإنجاز بنجاح ✓');
-  clearAch(); loadDash();
+  clearAch();loadDash();
 }
-function clearAch() {
+function clearAch(){
   ['a-id','a-name','a-work'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('a-act').value='';
-  document.getElementById('a-date').valueAsDate = new Date();
+  document.getElementById('a-date').valueAsDate=new Date();
+}
+
+// ══ المستخدمون ══
+async function loadUsers(){
+  const rows=await api('/api/users');
+  if(rows.error)return;
+  document.getElementById('users-body').innerHTML=rows.map(r=>`<tr>
+    <td><strong>${r.username}</strong></td><td>${r.fullName}</td>
+    <td><span class="badge ${ROLE_CLASSES[r.role]}">${ROLE_LABELS[r.role]}</span></td>
+    <td>${new Date(r.createdAt).toLocaleDateString('ar')}</td>
+    <td>${r.username!=='admin'?`<button class="btn btn-danger" onclick="delUser('${r._id}')"><i class="ti ti-trash"></i></button>`:''}</td>
+  </tr>`).join('');
+}
+async function addUser(){
+  const data={
+    username:document.getElementById('u-username').value.trim(),
+    fullName:document.getElementById('u-fullname').value.trim(),
+    password:document.getElementById('u-password').value,
+    role:document.getElementById('u-role').value,
+  };
+  const r=await api('/api/users','POST',data);
+  if(r.error){showMsg('user-msg',r.error,true);return;}
+  showMsg('user-msg','تم إنشاء المستخدم بنجاح ✓');
+  ['u-username','u-fullname','u-password'].forEach(id=>document.getElementById(id).value='');
+  loadUsers();
+}
+async function delUser(id){
+  if(!confirm('هل تريد حذف هذا المستخدم؟'))return;
+  await api('/api/users/'+id,'DELETE');
+  loadUsers();
 }
 
 // ══ الاستعلامات ══
-async function q1Search() {
-  const q = document.getElementById('q1-in').value.trim();
-  const box = document.getElementById('q1-result');
-  if(!q) { box.style.display='none'; return; }
-  const rows = await api('/api/students?q='+encodeURIComponent(q));
-  if(!rows.length) { box.innerHTML='<p style="color:var(--e-fg)">لم يتم العثور على أي طالب</p>'; box.style.display='block'; return; }
-  box.innerHTML = rows.map(r=>`
-    <div style="background:#fff;border-radius:var(--r);padding:14px;margin-bottom:10px;border:1px solid var(--border)">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-        <div class="avatar">${r.name.charAt(0)}</div>
-        <div><div style="font-weight:600;font-size:15px">${r.name}</div><div style="font-size:12px;color:var(--muted)">${r.student_id}</div></div>
-        ${badge(r.activity)}
-      </div>
-      ${[['الجنس',r.gender],['الكلية',r.college],['التخصص',r.major],
-         ['سنة القبول',r.admit_year],['نوع القبول',r.admit_type||'-'],
-         ['تاريخ الالتحاق',r.join_date],['الهاتف',r.phone||'-']]
-        .map(([l,v])=>`<div style="display:flex;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px">
-          <span style="color:var(--muted);min-width:160px">${l}</span><span>${v}</span></div>`).join('')}
-    </div>`).join('');
+async function q1Search(){
+  const q=document.getElementById('q1-in').value.trim();
+  const box=document.getElementById('q1-result');
+  if(!q){box.style.display='none';return;}
+  const rows=await api('/api/students?q='+encodeURIComponent(q));
+  if(!rows.length){box.innerHTML='<p style="color:var(--e-fg)">لم يتم العثور على أي طالب</p>';box.style.display='block';return;}
+  box.innerHTML=rows.map(r=>`<div style="background:#fff;border-radius:var(--r);padding:14px;margin-bottom:10px;border:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="width:40px;height:40px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;color:#3C3489">${r.name.charAt(0)}</div>
+      <div><div style="font-weight:600">${r.name}</div><div style="font-size:12px;color:var(--muted)">${r.student_id}</div></div>${badge(r.activity)}</div>
+    ${[['الجنس',r.gender],['الكلية',r.college],['التخصص',r.major],['سنة القبول',r.admit_year],['نوع القبول',r.admit_type||'-'],['تاريخ الالتحاق',r.join_date],['الهاتف',r.phone||'-']]
+      .map(([l,v])=>`<div style="display:flex;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--muted);min-width:140px">${l}</span><span>${v}</span></div>`).join('')}
+  </div>`).join('');
   box.style.display='block';
 }
 
-async function q2Search() {
-  const q = document.getElementById('q2-in').value.trim();
-  const box = document.getElementById('q2-result');
-  if(!q) { box.style.display='none'; return; }
-  const rows = await api('/api/achievements?q='+encodeURIComponent(q));
-  if(!rows.length) { box.innerHTML='<p style="color:var(--e-fg)">لا توجد إنجازات لهذا الطالب</p>'; box.style.display='block'; return; }
-  box.innerHTML = `<div style="margin-bottom:8px;font-size:13px;color:var(--muted)">الإنجازات: ${rows.length}</div>`
-    + rows.map(r=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-radius:var(--r);margin-bottom:6px;border:1px solid var(--border)">
-        <i class="ti ti-award" style="color:var(--primary);font-size:16px"></i>
-        <div style="flex:1"><div style="font-size:13px">${r.work}</div>
-        <div style="font-size:12px;color:var(--muted)">${r.student_name||''} · ${r.student_id}</div></div>
-        ${r.activity?badge(r.activity):''}
-        <span style="font-size:12px;color:var(--muted)">${r.ach_date}</span>
-      </div>`).join('');
+async function q2Search(){
+  const q=document.getElementById('q2-in').value.trim();
+  const box=document.getElementById('q2-result');
+  if(!q){box.style.display='none';return;}
+  const rows=await api('/api/achievements?q='+encodeURIComponent(q));
+  if(!rows.length){box.innerHTML='<p style="color:var(--e-fg)">لا توجد إنجازات لهذا الطالب</p>';box.style.display='block';return;}
+  box.innerHTML=`<div style="font-size:13px;color:var(--muted);margin-bottom:8px">الإنجازات: ${rows.length}</div>`
+    +rows.map(r=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-radius:var(--r);margin-bottom:6px;border:1px solid var(--border)">
+      <i class="ti ti-award" style="color:var(--primary);font-size:16px"></i>
+      <div style="flex:1"><div style="font-size:13px">${r.work}</div><div style="font-size:12px;color:var(--muted)">${r.student_name||''} · ${r.student_id}</div></div>
+      ${r.activity?badge(r.activity):''}<span style="font-size:12px;color:var(--muted)">${r.ach_date}</span></div>`).join('');
   box.style.display='block';
 }
 
-async function q3Search() {
-  const act  = document.getElementById('q3-act').value;
-  const from = document.getElementById('q3-from').value;
-  const to   = document.getElementById('q3-to').value;
-  const box  = document.getElementById('q3-result');
-  const p    = new URLSearchParams();
-  if(act)  p.set('activity',act);
-  if(from) p.set('from',from);
-  if(to)   p.set('to',to);
-  const d = await api('/api/query/count?'+p);
-  box.innerHTML = `
-    <div class="count-cards">
-      <div class="count-card"><div class="count-num" style="color:var(--primary)">${d.total}</div><div class="count-label">إجمالي</div></div>
-      <div class="count-card"><div class="count-num" style="color:#185FA5">${d.males}</div><div class="count-label">ذكور</div></div>
-      <div class="count-card"><div class="count-num" style="color:#993556">${d.females}</div><div class="count-label">إناث</div></div>
-    </div>
-    ${d.rows.length ? `<div class="table-wrap"><table><thead><tr>
-      <th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th><th>النشاط</th><th>تاريخ الالتحاق</th>
-    </tr></thead><tbody>
-      ${d.rows.map(r=>`<tr><td><strong>${r.student_id}</strong></td><td>${r.name}</td><td>${r.gender}</td>
-        <td style="font-size:12px">${r.college}</td><td>${badge(r.activity)}</td><td>${r.join_date}</td></tr>`).join('')}
-    </tbody></table></div>` : '<p style="color:var(--muted);text-align:center">لا توجد نتائج</p>'}`;
+async function q3Search(){
+  const p=new URLSearchParams();
+  const act=document.getElementById('q3-act').value;
+  const from=document.getElementById('q3-from').value;
+  const to=document.getElementById('q3-to').value;
+  if(act)p.set('activity',act);if(from)p.set('from',from);if(to)p.set('to',to);
+  const d=await api('/api/query/count?'+p);
+  const box=document.getElementById('q3-result');
+  box.innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+    <div class="stat-card"><div class="stat-num">${d.total}</div><div class="stat-label">إجمالي</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#185FA5">${d.males}</div><div class="stat-label">ذكور</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#993556">${d.females}</div><div class="stat-label">إناث</div></div>
+  </div>${d.rows.length?`<div class="table-wrap"><table><thead><tr><th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th><th>النشاط</th><th>تاريخ الالتحاق</th></tr></thead><tbody>
+    ${d.rows.map(r=>`<tr><td><strong>${r.student_id}</strong></td><td>${r.name}</td><td>${r.gender}</td><td style="font-size:12px">${r.college}</td><td>${badge(r.activity)}</td><td>${r.join_date}</td></tr>`).join('')}
+  </tbody></table></div>`:'<p style="color:var(--muted);text-align:center">لا توجد نتائج</p>'}`;
   box.style.display='block';
 }
 
-async function q4Search() {
-  const act  = document.getElementById('q4-act').value;
-  const from = document.getElementById('q4-from').value;
-  const to   = document.getElementById('q4-to').value;
-  const box  = document.getElementById('q4-result');
-  if(!act) { alert('يرجى اختيار النشاط أولاً'); return; }
-  const p = new URLSearchParams({activity:act});
-  if(from) p.set('from',from);
-  if(to)   p.set('to',to);
-  const rows = await api('/api/query/activity-ach?'+p);
-  box.innerHTML = `<div style="margin-bottom:10px;display:flex;align-items:center;gap:8px">${badge(act)}<span style="font-size:13px;color:var(--muted)">الإنجازات: <strong>${rows.length}</strong></span></div>`
-    + (rows.length
-      ? `<div class="table-wrap"><table><thead><tr><th>الرقم الجامعي</th><th>اسم الطالب</th><th>الإنجاز / المشاركة</th><th>التاريخ</th></tr></thead><tbody>
-          ${rows.map(r=>`<tr><td><strong>${r.student_id}</strong></td><td>${r.student_name||'-'}</td>
-            <td>${r.work}</td><td>${r.ach_date}</td></tr>`).join('')}
-        </tbody></table></div>`
-      : '<p style="color:var(--muted);text-align:center">لا توجد إنجازات في هذه الفترة</p>');
+async function q4Search(){
+  const act=document.getElementById('q4-act').value;
+  if(!act){alert('يرجى اختيار النشاط أولاً');return;}
+  const p=new URLSearchParams({activity:act});
+  const from=document.getElementById('q4-from').value;
+  const to=document.getElementById('q4-to').value;
+  if(from)p.set('from',from);if(to)p.set('to',to);
+  const rows=await api('/api/query/activity-ach?'+p);
+  const box=document.getElementById('q4-result');
+  box.innerHTML=`<div style="margin-bottom:10px">${badge(act)} <span style="font-size:13px;color:var(--muted)">الإنجازات: <strong>${rows.length}</strong></span></div>`
+    +(rows.length?`<div class="table-wrap"><table><thead><tr><th>الرقم الجامعي</th><th>اسم الطالب</th><th>الإنجاز</th><th>التاريخ</th></tr></thead><tbody>
+      ${rows.map(r=>`<tr><td><strong>${r.student_id}</strong></td><td>${r.student_name||'-'}</td><td>${r.work}</td><td>${r.ach_date}</td></tr>`).join('')}
+    </tbody></table></div>`:'<p style="color:var(--muted);text-align:center">لا توجد إنجازات</p>');
   box.style.display='block';
 }
 
-
-// ══════════════════════════════
-//  وظائف الطباعة
-// ══════════════════════════════
-
-let currentPrintType = '';
-
-const PRINT_FORMS = {
-  list: `
-    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">قائمة طلبة النشاط</h3>
-    <div class="form-grid">
-      <div class="form-group"><label>النشاط *</label>
-        <select id="pf-act"><option value="">اختر النشاط...</option></select></div>
-      <div class="form-group"><label>الكلية (اختياري)</label>
-        <select id="pf-col"><option value="">جميع الكليات</option></select></div>
-      <div class="form-group"><label>الجنس (اختياري)</label>
-        <select id="pf-gen"><option value="">الجنسان</option><option>ذكر</option><option>أنثى</option></select></div>
-    </div>`,
-  student: `
-    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">بطاقة طالب</h3>
-    <div class="form-grid">
-      <div class="form-group full"><label>الرقم الجامعي *</label>
-        <input id="pf-sid" type="text" placeholder="أدخل الرقم الجامعي"></div>
-    </div>`,
-  achievements: `
-    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">إنجازات طالب</h3>
-    <div class="form-grid">
-      <div class="form-group full"><label>الرقم الجامعي أو الاسم *</label>
-        <input id="pf-sq" type="text" placeholder="أدخل الرقم الجامعي أو الاسم"></div>
-    </div>`,
-  actach: `
-    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">إنجازات النشاط</h3>
-    <div class="form-grid">
-      <div class="form-group"><label>النشاط *</label>
-        <select id="pf-aact"><option value="">اختر النشاط...</option></select></div>
-      <div class="form-group"><label>من تاريخ</label><input id="pf-from" type="date"></div>
-      <div class="form-group"><label>إلى تاريخ</label><input id="pf-to" type="date"></div>
-    </div>`,
-  stats: `
-    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">التقرير الإحصائي الشامل</h3>
-    <p style="font-size:13px;color:var(--muted)">سيتم إنشاء تقرير شامل بجميع الإحصائيات الحالية في النظام.</p>`,
-  all: `
-    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">كل الطلبة المسجلين</h3>
-    <div class="form-grid">
-      <div class="form-group"><label>النشاط (اختياري)</label>
-        <select id="pf-aall"><option value="">جميع الأنشطة</option></select></div>
-      <div class="form-group"><label>الكلية (اختياري)</label>
-        <select id="pf-call"><option value="">جميع الكليات</option></select></div>
-    </div>`,
+// ══ الطباعة ══
+const PRINT_FORMS={
+  list:`<h3 style="font-size:15px;font-weight:600;margin-bottom:12px">قائمة طلبة النشاط</h3><div class="form-grid"><div class="form-group"><label>النشاط *</label><select id="pf-act"><option value="">اختر...</option></select></div><div class="form-group"><label>الكلية</label><select id="pf-col"><option value="">جميع الكليات</option></select></div><div class="form-group"><label>الجنس</label><select id="pf-gen"><option value="">الجنسان</option><option>ذكر</option><option>أنثى</option></select></div></div>`,
+  student:`<h3 style="font-size:15px;font-weight:600;margin-bottom:12px">بطاقة طالب</h3><div class="form-group full"><label>الرقم الجامعي *</label><input id="pf-sid" type="text"></div>`,
+  achievements:`<h3 style="font-size:15px;font-weight:600;margin-bottom:12px">إنجازات طالب</h3><div class="form-group full"><label>الرقم الجامعي أو الاسم *</label><input id="pf-sq" type="text"></div>`,
+  actach:`<h3 style="font-size:15px;font-weight:600;margin-bottom:12px">إنجازات النشاط</h3><div class="form-grid"><div class="form-group"><label>النشاط *</label><select id="pf-aact"><option value="">اختر...</option></select></div><div class="form-group"><label>من تاريخ</label><input id="pf-from" type="date"></div><div class="form-group"><label>إلى تاريخ</label><input id="pf-to" type="date"></div></div>`,
+  stats:`<h3 style="font-size:15px;font-weight:600;margin-bottom:12px">التقرير الإحصائي الشامل</h3><p style="font-size:13px;color:var(--muted)">سيتم إنشاء تقرير شامل بجميع الإحصائيات.</p>`,
+  all:`<h3 style="font-size:15px;font-weight:600;margin-bottom:12px">كل الطلبة</h3><div class="form-grid"><div class="form-group"><label>النشاط</label><select id="pf-aall"><option value="">جميع الأنشطة</option></select></div><div class="form-group"><label>الكلية</label><select id="pf-call"><option value="">جميع الكليات</option></select></div></div>`,
 };
-
-function showPrint(type) {
-  currentPrintType = type;
-  const form = document.getElementById('print-form');
-  const content = document.getElementById('print-form-content');
-  content.innerHTML = PRINT_FORMS[type];
-  form.style.display = 'block';
-  document.getElementById('print-preview-area').style.display = 'none';
-  // ملء القوائم
-  ['pf-act','pf-aact','pf-aall'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) fillSelect(id, ACTIVITIES, el.options[0]?.textContent || '');
-  });
-  ['pf-col','pf-call'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) fillSelect(id, COLLEGES, el.options[0]?.textContent || '');
-  });
+let printType='';
+function showPrint(t){
+  printType=t;
+  const f=document.getElementById('print-form');
+  document.getElementById('print-form-content').innerHTML=PRINT_FORMS[t];
+  f.style.display='block';
+  document.getElementById('print-preview-area').style.display='none';
+  ['pf-act','pf-aact','pf-aall'].forEach(id=>{const el=document.getElementById(id);if(el)fillSelect(id,ACTIVITIES,el.options[0]?.textContent||'');});
+  ['pf-col','pf-call'].forEach(id=>{const el=document.getElementById(id);if(el)fillSelect(id,COLLEGES,el.options[0]?.textContent||'');});
+}
+function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+function today(){return new Date().toLocaleDateString('ar-JO',{year:'numeric',month:'long',day:'numeric'});}
+function printHdr(title,sub=''){return`<div class="print-page"><div class="print-title">جامعة الأردن — عمادة شؤون الطلبة<br><span style="font-size:14pt">${title}</span></div>${sub?`<div style="text-align:center;color:#666;margin-bottom:5mm">${sub}</div>`:''}<div style="font-size:10pt;color:#666;text-align:left;margin-bottom:6mm">تاريخ الطباعة: ${today()}</div>`;}
+function studTable(rows){return rows.length?`<table class="print-table"><thead><tr><th>#</th><th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th><th>التخصص</th><th>سنة القبول</th><th>نوع القبول</th><th>تاريخ الالتحاق</th><th>الهاتف</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.student_id}</td><td>${r.name}</td><td>${r.gender}</td><td>${r.college}</td><td>${r.major}</td><td>${r.admit_year}</td><td>${r.admit_type||'-'}</td><td>${r.join_date}</td><td>${r.phone||'-'}</td></tr>`).join('')}</tbody></table><p style="font-size:10pt;margin-top:4mm">الإجمالي: ${rows.length} طالب</p>`:'<p style="text-align:center;color:#999">لا توجد بيانات</p>';}
+async function generatePrint(){
+  let html='';
+  if(printType==='list'){const act=g('pf-act');if(!act){alert('يرجى اختيار النشاط');return;}const p=new URLSearchParams({activity:act});if(g('pf-col'))p.set('college',g('pf-col'));if(g('pf-gen'))p.set('gender',g('pf-gen'));const rows=await api('/api/students?'+p);html=printHdr('قائمة الطلبة المسجلين',act)+studTable(rows)+'</div>';}
+  else if(printType==='student'){const sid=g('pf-sid');if(!sid){alert('يرجى إدخال الرقم الجامعي');return;}const rows=await api('/api/students?q='+encodeURIComponent(sid));const r=rows.find(s=>s.student_id===sid)||rows[0];if(!r){alert('لم يتم العثور على الطالب');return;}html=printHdr('بطاقة طالب')+`<div class="student-card-box"><div class="student-card-header"><div style="font-size:16pt;font-weight:700">${r.name}</div><div style="font-size:11pt;opacity:.85">${r.student_id}</div></div>${[['الجنس',r.gender],['الكلية',r.college],['التخصص',r.major],['سنة القبول',r.admit_year],['نوع القبول',r.admit_type||'-'],['النشاط',r.activity],['تاريخ الالتحاق',r.join_date],['الهاتف',r.phone||'-']].map(([l,v])=>`<div class="student-card-row"><span style="color:#666">${l}</span><span>${v}</span></div>`).join('')}</div></div>`;}
+  else if(printType==='achievements'){const q=g('pf-sq');if(!q){alert('يرجى إدخال الرقم الجامعي أو الاسم');return;}const[studs,achs]=await Promise.all([api('/api/students?q='+encodeURIComponent(q)),api('/api/achievements?q='+encodeURIComponent(q))]);const r=studs[0];html=printHdr('تقرير إنجازات طالب',r?r.name+' — '+r.student_id:q)+(r?`<div style="margin-bottom:5mm;font-size:11pt"><b>الكلية:</b> ${r.college} | <b>النشاط:</b> ${r.activity}</div>`:'')+(!achs.length?'<p>لا توجد إنجازات</p>':`<table class="print-table"><thead><tr><th>#</th><th>الإنجاز</th><th>النشاط</th><th>التاريخ</th></tr></thead><tbody>${achs.map((a,i)=>`<tr><td>${i+1}</td><td>${a.work}</td><td>${a.activity||'-'}</td><td>${a.ach_date}</td></tr>`).join('')}</tbody></table><p style="font-size:10pt;margin-top:4mm">إجمالي الإنجازات: ${achs.length}</p>`)+'</div>';}
+  else if(printType==='actach'){const act=g('pf-aact');if(!act){alert('يرجى اختيار النشاط');return;}const p=new URLSearchParams({activity:act});if(g('pf-from'))p.set('from',g('pf-from'));if(g('pf-to'))p.set('to',g('pf-to'));const rows=await api('/api/query/activity-ach?'+p);html=printHdr('إنجازات النشاط',act)+`<table class="print-table"><thead><tr><th>#</th><th>الرقم الجامعي</th><th>اسم الطالب</th><th>الإنجاز</th><th>التاريخ</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.student_id}</td><td>${r.student_name||'-'}</td><td>${r.work}</td><td>${r.ach_date}</td></tr>`).join('')}</tbody></table><p style="font-size:10pt;margin-top:4mm">إجمالي: ${rows.length}</p></div>`;}
+  else if(printType==='stats'){const d=await api('/api/stats');const all=await api('/api/students');const byAct=Object.fromEntries(d.by_activity.map(r=>[r.activity,r.n]));const byCol={};all.forEach(s=>{byCol[s.college]=(byCol[s.college]||0)+1;});html=printHdr('التقرير الإحصائي الشامل')+`<div class="stat-print-grid"><div class="stat-print-card"><div class="stat-print-num">${d.total_s}</div><div>إجمالي السجلات</div></div><div class="stat-print-card"><div class="stat-print-num">${d.unique_s}</div><div>طلبة فريدون</div></div><div class="stat-print-card"><div class="stat-print-num">${d.total_a}</div><div>الإنجازات</div></div></div><table class="print-table" style="margin-bottom:8mm"><thead><tr><th>النشاط</th><th>العدد</th></tr></thead><tbody>${ACTIVITIES.map(a=>`<tr><td>${a}</td><td>${byAct[a]||0}</td></tr>`).join('')}</tbody></table><table class="print-table"><thead><tr><th>الكلية</th><th>العدد</th></tr></thead><tbody>${Object.entries(byCol).sort((a,b)=>b[1]-a[1]).map(([c,n])=>`<tr><td>${c}</td><td>${n}</td></tr>`).join('')}</tbody></table></div>`;}
+  else if(printType==='all'){const p=new URLSearchParams();if(g('pf-aall'))p.set('activity',g('pf-aall'));if(g('pf-call'))p.set('college',g('pf-call'));const rows=await api('/api/students?'+p);html=printHdr('قائمة جميع الطلبة المسجلين')+studTable(rows)+'</div>';}
+  document.getElementById('print-preview').innerHTML=html;
+  document.getElementById('print-preview-area').style.display='block';
+  document.getElementById('print-form').style.display='none';
 }
 
-function closePrintPreview() {
-  document.getElementById('print-preview-area').style.display = 'none';
-  document.getElementById('print-form').style.display = 'none';
+function exportCSV(type){window.location.href='/api/export/'+type;}
+
+// ══ التحقق من الجلسة عند التحميل ══
+async function checkSession(){
+  if(!token){return;}
+  const r=await api('/api/auth/me');
+  if(r.error){localStorage.removeItem('token');token=null;return;}
+  currentUser=r;
+  showApp();
 }
-
-function g(id) { const el=document.getElementById(id); return el ? el.value.trim() : ''; }
-
-function today() { return new Date().toLocaleDateString('ar-JO',{year:'numeric',month:'long',day:'numeric'}); }
-
-function printHeader(title, sub='') {
-  return `<div class="print-page">
-    <div class="print-title">جامعة الأردن — عمادة شؤون الطلبة<br><span style="font-size:14pt">${title}</span></div>
-    ${sub ? `<div class="print-sub">${sub}</div>` : ''}
-    <div style="font-size:10pt;color:#666;text-align:left;margin-bottom:6mm">تاريخ الطباعة: ${today()}</div>`;
-}
-
-function studentsTableHTML(rows) {
-  if(!rows.length) return '<p style="text-align:center;color:#999">لا توجد بيانات</p>';
-  return `<table class="print-table">
-    <thead><tr><th>#</th><th>الرقم الجامعي</th><th>الاسم</th><th>الجنس</th><th>الكلية</th><th>التخصص</th><th>سنة القبول</th><th>نوع القبول</th><th>تاريخ الالتحاق</th><th>الهاتف</th></tr></thead>
-    <tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.student_id}</td><td>${r.name}</td><td>${r.gender}</td><td>${r.college}</td><td>${r.major}</td><td>${r.admit_year}</td><td>${r.admit_type||'-'}</td><td>${r.join_date}</td><td>${r.phone||'-'}</td></tr>`).join('')}</tbody>
-  </table>
-  <p style="font-size:10pt;margin-top:4mm">الإجمالي: ${rows.length} طالب</p>`;
-}
-
-async function generatePrint() {
-  const preview = document.getElementById('print-preview');
-  const previewArea = document.getElementById('print-preview-area');
-  let html = '';
-
-  if(currentPrintType === 'list') {
-    const act = g('pf-act'), col = g('pf-col'), gen = g('pf-gen');
-    if(!act) { alert('يرجى اختيار النشاط'); return; }
-    const p = new URLSearchParams({activity:act});
-    if(col) p.set('college',col);
-    if(gen) p.set('gender',gen);
-    const rows = await api('/api/students?'+p);
-    const sub = [act, col, gen].filter(Boolean).join(' — ');
-    html = printHeader('قائمة الطلبة المسجلين', sub) + studentsTableHTML(rows) + '</div>';
-  }
-
-  else if(currentPrintType === 'student') {
-    const sid = g('pf-sid');
-    if(!sid) { alert('يرجى إدخال الرقم الجامعي'); return; }
-    const rows = await api('/api/students?q='+encodeURIComponent(sid));
-    const r = rows.find(s=>s.student_id===sid) || rows[0];
-    if(!r) { alert('لم يتم العثور على الطالب'); return; }
-    html = printHeader('بطاقة طالب') +
-    `<div class="student-card-box">
-      <div class="student-card-header">
-        <div style="font-size:16pt;font-weight:700">${r.name}</div>
-        <div style="font-size:11pt;opacity:.85">${r.student_id}</div>
-      </div>
-      ${[
-        ['الجنس',r.gender],['الكلية',r.college],['التخصص',r.major],
-        ['سنة القبول',r.admit_year],['نوع القبول',r.admit_type||'-'],
-        ['النشاط',r.activity],['تاريخ الالتحاق',r.join_date],
-        ['رقم الهاتف',r.phone||'-']
-      ].map(([l,v])=>`<div class="student-card-row"><span class="student-card-lbl">${l}</span><span>${v}</span></div>`).join('')}
-    </div></div>`;
-  }
-
-  else if(currentPrintType === 'achievements') {
-    const q = g('pf-sq');
-    if(!q) { alert('يرجى إدخال الرقم الجامعي أو الاسم'); return; }
-    const studs = await api('/api/students?q='+encodeURIComponent(q));
-    const achs  = await api('/api/achievements?q='+encodeURIComponent(q));
-    const r = studs[0];
-    html = printHeader('تقرير إنجازات طالب', r ? r.name + ' — ' + r.student_id : q);
-    if(r) html += `<div style="margin-bottom:5mm;font-size:11pt">
-      <b>الكلية:</b> ${r.college} &nbsp;|&nbsp; <b>التخصص:</b> ${r.major} &nbsp;|&nbsp; <b>النشاط:</b> ${r.activity}
-    </div>`;
-    if(!achs.length) { html += '<p>لا توجد إنجازات مسجلة</p>'; }
-    else {
-      html += `<table class="print-table">
-        <thead><tr><th>#</th><th>الإنجاز / المشاركة</th><th>النشاط</th><th>التاريخ</th></tr></thead>
-        <tbody>${achs.map((a,i)=>`<tr><td>${i+1}</td><td>${a.work}</td><td>${a.activity||'-'}</td><td>${a.ach_date}</td></tr>`).join('')}</tbody>
-      </table>
-      <p style="font-size:10pt;margin-top:4mm">إجمالي الإنجازات: ${achs.length}</p>`;
-    }
-    html += '</div>';
-  }
-
-  else if(currentPrintType === 'actach') {
-    const act=g('pf-aact'), from=g('pf-from'), to=g('pf-to');
-    if(!act) { alert('يرجى اختيار النشاط'); return; }
-    const p = new URLSearchParams({activity:act});
-    if(from) p.set('from',from); if(to) p.set('to',to);
-    const rows = await api('/api/query/activity-ach?'+p);
-    const period = (from&&to)?`من ${from} إلى ${to}`:from?`من ${from}`:to?`إلى ${to}`:'كل الفترات';
-    html = printHeader('إنجازات النشاط', act+' — '+period) +
-    `<table class="print-table">
-      <thead><tr><th>#</th><th>الرقم الجامعي</th><th>اسم الطالب</th><th>الإنجاز / المشاركة</th><th>التاريخ</th></tr></thead>
-      <tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.student_id}</td><td>${r.student_name||'-'}</td><td>${r.work}</td><td>${r.ach_date}</td></tr>`).join('')}</tbody>
-    </table>
-    <p style="font-size:10pt;margin-top:4mm">إجمالي الإنجازات: ${rows.length}</p></div>`;
-  }
-
-  else if(currentPrintType === 'stats') {
-    const d = await api('/api/stats');
-    const byAct = Object.fromEntries(d.by_activity.map(r=>[r.activity,r.n]));
-    html = printHeader('التقرير الإحصائي الشامل') +
-    `<div class="stat-print-grid">
-      <div class="stat-print-card"><div class="stat-print-num">${d.total_s}</div><div class="stat-print-lbl">إجمالي السجلات</div></div>
-      <div class="stat-print-card"><div class="stat-print-num">${d.unique_s}</div><div class="stat-print-lbl">طلبة فريدون</div></div>
-      <div class="stat-print-card"><div class="stat-print-num">${d.total_a}</div><div class="stat-print-lbl">الإنجازات</div></div>
-    </div>
-    <h3 style="font-size:13pt;margin-bottom:4mm;color:#534AB7">توزيع الطلبة على الأنشطة</h3>
-    <table class="print-table" style="margin-bottom:8mm">
-      <thead><tr><th>النشاط</th><th>عدد الطلبة</th></tr></thead>
-      <tbody>${ACTIVITIES.map(a=>`<tr><td>${a}</td><td>${byAct[a]||0}</td></tr>`).join('')}</tbody>
-    </table>`;
-    // توزيع الكليات
-    const allStuds = await api('/api/students');
-    const byCol = {};
-    allStuds.forEach(s=>{ byCol[s.college]=(byCol[s.college]||0)+1; });
-    const males = allStuds.filter(s=>s.gender==='ذكر').length;
-    const females = allStuds.filter(s=>s.gender==='أنثى').length;
-    html += `<h3 style="font-size:13pt;margin-bottom:4mm;color:#534AB7">توزيع الجنس</h3>
-    <table class="print-table" style="margin-bottom:8mm">
-      <thead><tr><th>الجنس</th><th>العدد</th></tr></thead>
-      <tbody><tr><td>ذكر</td><td>${males}</td></tr><tr><td>أنثى</td><td>${females}</td></tr></tbody>
-    </table>
-    <h3 style="font-size:13pt;margin-bottom:4mm;color:#534AB7">توزيع الكليات</h3>
-    <table class="print-table">
-      <thead><tr><th>الكلية</th><th>العدد</th></tr></thead>
-      <tbody>${Object.entries(byCol).sort((a,b)=>b[1]-a[1]).map(([c,n])=>`<tr><td>${c}</td><td>${n}</td></tr>`).join('')}</tbody>
-    </table></div>`;
-  }
-
-  else if(currentPrintType === 'all') {
-    const act=g('pf-aall'), col=g('pf-call');
-    const p = new URLSearchParams();
-    if(act) p.set('activity',act);
-    if(col) p.set('college',col);
-    const rows = await api('/api/students?'+p);
-    const sub = [act||'جميع الأنشطة', col||'جميع الكليات'].join(' — ');
-    html = printHeader('قائمة جميع الطلبة المسجلين', sub) + studentsTableHTML(rows) + '</div>';
-  }
-
-  preview.innerHTML = html;
-  previewArea.style.display = 'block';
-  document.getElementById('print-form').style.display = 'none';
-  previewArea.scrollIntoView({behavior:'smooth'});
-}
-
-
-function exportCSV(type) { window.location.href = '/api/export/'+type; }
-
-init();
+checkSession();
 </script>
 </body>
 </html>
