@@ -320,7 +320,7 @@ tr:hover td{background:#FAFAFA}
 </div>
 
 <script>
-const ACTIVITIES=['المرسم الجامعي','الموسيقى','الخط العربي','الحرف اليدوية','الأداء الحركي','الأنشطة الحزبية'];
+const ACTIVITIES=['المرسم الجامعي','الموسيقى','الخط العربي','الحرف اليدوية','الأداء الحركي','المناظرات','الأنشطة الحزبية'];
 const COLLEGES=['كلية الآداب','كلية الأعمال','كلية الشريعة','كلية العلوم التربوية','كلية الحقوق','كلية علوم الرياضة','كلية الفنون والتصميم','كلية الأمير الحسين بن عبدالله الثاني للعلوم السياسية و الدراسات الدولية','كلية اللغات الأجنبية','كلية الآثار','كلية العلوم','كلية الزراعة','كلية الهندسة','كلية الملك عبدالله الثاني لتكنولوجيا المعلومات','كلية الطب','كلية التمريض','كلية طب الأسنان','كلية علوم التأهيل','معهد الصحة العامة','كلية الدراسات العليا'];
 const ADMIT=['انتظام','انتساب','موازي','تحويل','تفوق فني'];
 const ACT_COLORS={'المرسم الجامعي':['#EEEDFE','#3C3489'],'الموسيقى':['#E1F5EE','#085041'],'الخط العربي':['#FAEEDA','#633806'],'الحرف اليدوية':['#FAECE7','#712B13'],'الأداء الحركي':['#EAF3DE','#27500A'],'الأنشطة الحزبية':['#FBEAF0','#72243E']};
@@ -332,8 +332,11 @@ let token=localStorage.getItem('token');
 
 function fillSelect(id,vals,def=''){
   const el=document.getElementById(id);if(!el)return;
-  while(el.options.length>(def?1:0))el.remove(def?1:0);
+  const existing=el.value;
+  while(el.options.length>0)el.remove(0);
+  if(def){const o=document.createElement('option');o.value='';o.textContent=def;el.appendChild(o);}
   vals.forEach(v=>{const o=document.createElement('option');o.value=o.textContent=v;el.appendChild(o);});
+  if(existing)el.value=existing;
 }
 
 function badge(act){
@@ -405,11 +408,11 @@ function showApp(){
   fillSelect('f-college',COLLEGES,'اختر الكلية...');
   fillSelect('f-admit',ADMIT,'اختر...');
   fillSelect('f-activity',ACTIVITIES,'اختر النشاط...');
-  fillSelect('sf-act',ACTIVITIES,'');
-  fillSelect('sf-col',COLLEGES,'');
-  fillSelect('af-act',ACTIVITIES,'');
+  fillSelect('sf-act',ACTIVITIES,'جميع الأنشطة');
+  fillSelect('sf-col',COLLEGES,'جميع الكليات');
+  fillSelect('af-act',ACTIVITIES,'جميع الأنشطة');
   fillSelect('a-act',ACTIVITIES,'');
-  fillSelect('q3-act',ACTIVITIES,'');
+  fillSelect('q3-act',ACTIVITIES,'كل الأنشطة');
   fillSelect('q4-act',ACTIVITIES,'');
   document.getElementById('f-join').valueAsDate=new Date();
   document.getElementById('a-date').valueAsDate=new Date();
